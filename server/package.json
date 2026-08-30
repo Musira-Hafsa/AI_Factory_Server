@@ -1,0 +1,26 @@
+{
+  "name": "ai-support-desk-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "API for the AI-assisted customer support desk",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon --dns-result-order=ipv4first src/index.js",
+    "seed": "node src/seed.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": ">=0.40.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.4",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.14",
+    "socket.io": "^4.8.1"
+  }
+}
