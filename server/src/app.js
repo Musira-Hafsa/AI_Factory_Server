@@ -12,7 +12,16 @@ import { aiEnabled } from './services/aiService.js';
 
 export function createApp() {
   const app = express();
-  const origin = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
+  // CLIENT_ORIGIN may be a single URL or a comma-separated list (e.g. a
+  // staging + production frontend), so accept both.
+  const origin = (process.env.CLIENT_ORIGIN || 'http://localhost:5173')
+    .split(',')
+    .map((o) => o.trim())
+    .filter(Boolean);
+
+  // Render (and most PaaS hosts) sit behind a reverse proxy — trust the
+  // first hop so req.ip / req.secure reflect the real client, not the proxy.
+  app.set('trust proxy', 1);
 
   app.use(helmet());
   app.use(cors({ origin, credentials: true }));
